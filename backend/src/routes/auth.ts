@@ -69,10 +69,21 @@ router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
 });
 
 router.post("/logout", (req: Request, res: Response) => {
-  res.cookie("auth_token", "", {
-    expires: new Date(Date.now() - 1000 * 60 * 60 * 24),
+  res.clearCookie("auth_token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // true in production
+    sameSite: "none", // Required for cross-origin cookies
+    path: "/",        // Ensures it's cleared across the app
   });
   res.send();
 });
+
+
+// router.post("/logout", (req: Request, res: Response) => {
+//   res.cookie("auth_token", "", {
+//     expires: new Date(Date.now() - 1000 * 60 * 60 * 24),
+//   });
+//   res.send();
+// });
 
 export default router;
