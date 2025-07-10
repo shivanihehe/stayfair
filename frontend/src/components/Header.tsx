@@ -10,7 +10,7 @@ const Header = () => {
     <div className="bg-slate-900 py-2">
       <div className="container mx-auto flex flex-col gap-2">
         <span className="text-xl md:text-2xl text-white tracking-tight font- font-mono font-bold">
-          <Link to="/">stayfair.com</Link>
+          <Link to="/">StayFair.com</Link>
         </span>
         <span className="flex justify-end space-x-2 max-sm:text-xs gap-4">
           {isLoggedIn ? (
