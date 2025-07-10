@@ -57,10 +57,18 @@ router.post(
       );
 
       res.cookie("auth_token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 86400000,
-      });
+  httpOnly: true,
+  secure: true, // always true in production with HTTPS (Render is HTTPS)
+  sameSite: "none", // required for cross-site cookie access
+  maxAge: 86400000,
+  path: "/", // optional, but good practice
+});
+
+      // res.cookie("auth_token", token, {
+      //   httpOnly: true,
+      //   secure: process.env.NODE_ENV === "production",
+      //   maxAge: 86400000,
+      // });
 
       return res.status(200).json({ message: "User Registered OK" });
     } catch (error) {
