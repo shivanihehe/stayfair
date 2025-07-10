@@ -43,10 +43,19 @@ router.post(
       );
 
       res.cookie("auth_token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 86400000,
-      });
+  httpOnly: true,
+  secure: true, // required for cross-site cookies (Render is HTTPS)
+  sameSite: "none", // allow Vercel → Render cookie flow
+  maxAge: 86400000,
+  path: "/", // optional but good practice
+});
+
+
+      // res.cookie("auth_token", token, {
+      //   httpOnly: true,
+      //   secure: process.env.NODE_ENV === "production",
+      //   maxAge: 86400000,
+      // });
 
       return res.status(200).json({ userId: user._id });
     } catch (error) {
