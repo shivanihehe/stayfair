@@ -40,6 +40,10 @@ app.use("/api/my-hotels", myHotelRoutes);
 app.use("/api/hotels", hotelRoutes);
 app.use("/api/my-bookings", bookingRoutes);
 
+app.get("/", (req, res) => {
+  res.send("StayFair backend is running 🚀");
+});
+
 // app.get("*", (req: Request, res: Response) => {
 //   res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 // });
